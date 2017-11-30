@@ -4,7 +4,7 @@ set -eux
 set -o pipefail
 
 vundleDIR=~/.vim/bundle/vundle
-passwd=steven
+passwd=yourUserPasswd
 
 echo "###start###"
 
