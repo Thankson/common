@@ -1,0 +1,61 @@
+salt 10.201.1.134 pillar.data 
+
+salt '10.201.1.134' saltutil.refresh_pillar
+
+salt 10.201.1.134 state.sls tomcat.install
+
+{{ grains['mem_total'] }}
+
+{% for pro in pillar['project'] %}
+
+10     - require:
+ 11       - pkg: rsync-install
+ 
+   1 include:
+  2   - init.rsync
+  3   
+  4 {% for pro in pillar['project'] %} 
+  5 /opt/apache-tomcat-{{ pro }}:
+  6   file.recurse:  
+  7     - source: salt://init/tomcat/files/apache-tomcat-PROJECT
+  8     - user: root
+  9     - group: root
+ 10     - file_mode: 644  
+ 11     - dir_mode: 755
+ 12     - include_empty: Ture 
+ 13     - unless: test -d /opt/apache-tomcat-{{ pro }}
+ 14     - require:
+ 15       - pkg: rsync-install
+ 16     
+ 17 update_server_xml{{ pro }}:
+ 18   file.managed:
+ 19     - name: /opt/apache-tomcat-{{ pro }}/conf/server.xml
+ 20     - source: salt://init/tomcat/files/server.xml
+ 21     - mode: 644 
+ 22     - user: root
+ 23     - group: root
+ 24     - template: jinja
+ 25     - PORT1: {{ 9079+loop.index }}
+ 26     - PORT2: {{ 8079+loop.index }}
+ 27     - PROJECT_NAME: {{ pro }}
+ 28     - require:
+ 29       - file: /opt/apache-tomcat-{{ pro }}
+ 30     
+ 31 update_catalina_sh{{ pro }}:
+ 32   file.managed:
+ 33     - name: /opt/apache-tomcat-{{ pro }}/bin/catalina.sh
+ 34     - source: salt://init/tomcat/files/catalina.sh
+ 35     - mode: 644 
+ 36     - user: root
+ 37     - group: root
+ 38     - template: jinja
+ 39     - IP: {{ grains['fqdn_ip4'][0] }}
+ 40     - SIZE1: {{ pillar['jdk_mem_size'] }}
+ 41     - SIZE2: {{ pillar['jdk_mem_size'] }}
+ 42     - PORT3: {{ 12344+loop.index }}
+ 43     - require:
+ 44       - file: /opt/apache-tomcat-{{ pro }}
+ 45 {% endfor %}
+ 
+ 
+ 

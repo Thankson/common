@@ -1,0 +1,37 @@
+127.0.0.1   localhost localhost.localdomain localhost4 localhost4.localdomain4
+::1         localhost localhost.localdomain localhost6 localhost6.localdomain6
+
+{{ IP }} {{ HOSTNAME }}
+
+10.200.1.216 log.lvmama.com
+192.168.0.202 www.lvmama.com
+192.168.0.202 519.lvmama.com
+192.168.0.203 super.lvmama.com
+192.168.0.139 newinfo.lvmama.com
+192.168.0.203 e.lvmama.com
+192.168.0.202 m.lvmama.com
+192.168.0.202 api3g.lvmama.com
+192.168.0.202 login.lvmama.com
+192.168.0.202 cmt.lvmama.com
+192.168.0.202 search.lvmama.com
+192.168.0.139 bbs.lvmama.com
+192.168.0.203 pay.lvmama.com
+192.168.0.121 pic.lvmama.com
+192.168.0.139 guide.lvmama.com
+192.168.0.139 info.lvmama.com
+192.168.0.139 trip.lvmama.com
+192.168.0.139 tiyan.lvmama.com
+192.168.0.139 iguide.lvmama.com
+192.168.0.139 php.lvmama.com
+192.168.0.139 adguide.lvmama.com
+192.168.0.139 static.lvmama.com
+192.168.0.202 ticket.lvmama.com
+10.200.2.85 php-api.lvmama.com
+
+
+192.168.0.202 dujia.lvmama.com
+192.168.0.202 s.lvmama.com
+192.168.0.202 piclib.lvmama.com
+192.168.0.202 ticket1.lvmama.com
+192.168.0.202 www1.lvmama.com
+192.168.0.202  lvyue.lvmama.com

@@ -1,0 +1,13 @@
+cedwards:
+  user.present:
+    - fullname: Christer Edwards
+    - password: '$6$JyhDBiOi5ZyvaDWm$.5QKIgCtYOLXpLDCc9HMJ8fnAq.c3enJ32BIWGcuKt/y2awHL3w2PlNLxJD9gHE/FtKkG348P8HArXGSkd5uC/'
+    - shell: /usr/local/bin/bash
+    - home: /home/cedwards
+    - uid: 1001
+    - gid: 1001
+    - groups:
+      - wheel
+
+jdoe:
+  user.absent
