@@ -15,6 +15,7 @@ atom-ternjs 插件对项目配置做了可视化，可以通过菜单来操作:
 | :-------- | --------:| :------:      |
 | 运行      |    cmd+i |  ctrl+shift+b |
 | 结束      |   ctrl+c |  ctrl+q       |
+
 [参考](https://juejin.im/entry/5764bb4880dda4005f86f5b3) `配置 Node.js 开发环境——使用 Atom`
 
 #### **atom-ternjs**  JS语法提示
@@ -31,12 +32,14 @@ atom-ternjs 插件对项目配置做了可视化，可以通过菜单来操作:
 ###### usage:
 #### **highlight-select**  高亮选择，双击选择的内容，会自动高亮全篇中的该内容
 ###### usage:
+
 [参考](https://www.cnblogs.com/jeanneze/p/6830844.html) `React开发相关Atom插件配置`
 
 ---------
 
 ## 用于react native 开发
 #### **Nuclide** Atom＋Nuclide插件
+
 [参考](http://blog.csdn.net/hello_hwc/article/details/51612139) ` React Native开发之IDE（Atom+Nuclide）安装，运行，调试`
 
 ---------
@@ -48,6 +51,7 @@ atom-ternjs 插件对项目配置做了可视化，可以通过菜单来操作:
 #### **markdown-image-paste**  图片粘贴
 #### **markdown-table-editor**  表格编辑
 #### **markdown-themeable-pdf、pdf-view**  pdf导出
+
 [参考](https://www.cnblogs.com/libin-1/p/6638165.html)
 
 ---------
