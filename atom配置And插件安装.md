@@ -1,4 +1,8 @@
 ## 用于react 开发
+#### **language-babel** package and follow the instructions.
+
+[参考](https://babeljs.io/docs/editors) `Learn how to use Babel【compile your React code】 in your editor of choice`
+
 #### **atom-ternjs** 用于 Javascript 和 Node.js 的自动补全
 ###### usage:
 ``` shell
