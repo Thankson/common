@@ -1,0 +1,89 @@
+
+https://www.sublimetext.com/docs/3/linux_repositories.html#apt
+
+######################### ubuntu 显卡驱动设置 #############################
+搜索 附加驱动 -> 附加驱动   ，再进行显卡选择（选择好要用的显卡硬件，需要联网下载被选中显卡的驱动程序[选择后自动下载]）
+
+######################### chrome 安装 #############################
+chrome 安装
+sudo apt-get upgrade
+sudo apt-get update
+sudo dpkg -i google*.deb	//1. 强制安装chrome： sudo dpkg -i google-chrome-stable_current_i386.deb --force
+sudo apt-get -f install		//2. 补齐依赖： sudo apt-get install -f
+
+######################### 使用翻墙软件（eg：lanten ），关掉翻墙软件后导致的浏览器不能上网问题的解决 #############################
+http://blog.csdn.net/weixin_38516136/article/details/78407950	// Ubuntu16.04网络连接正常但是无法使用浏览器上网-浏览器代理设置（chrome & Firefox 的解决方法）   或者 使用chrome的Switchy插件
+打开terminate敲如下命令。
+man google-chrome
+可以看到有设置代理的提示，可以分为以下三种。
+# 指定代理
+google-chrome --proxy=127.0.0.1:1080
+# 自动
+google-chrome --proxy-auto-detect
+# 不适用代理
+google-chrome --no-proxy-server
+我自己的话因为之前修改hosts，后来清空。。。等一系列骚操作导致第一种无法使用，亲测后续两种都可以使用。
+
+######################### 网络知识 #############################
+https://wenku.baidu.com/view/47d879d149649b6648d7475a.html	// IP 观念： IP(address), network, netmask, broadcast, gateway  // ARP协议
+	address   : 192.168.0.1~254
+	network   ：同一个网段里面，HOSTID 都为零的地址； 192.168.0.0     
+	netmask   : 255.255.255.0
+	broadcast ：同一个网段里面，HOSTID 都为 1 的地址 192.168.0.255
+	gateway   ：自订(依你的区网设定而异) 
+		什么是 gateway 呀！？说的简单一点：在同一个 network 底下，各 IP 可以直接进行沟通，但是在不同的 network 底下，则需要藉由 gateway 来进行资料的传递！因此，当您的主机发现该封包的 IP 不在同一个网域内时，就会自动的将封包传送到 gateway 上面去啦！而由于你的主机与 gateway 是可以直接进行沟通的，所以 gateway 与 你的主机『一定需要在同一个 network 当中』，这个就没有问题了吧！！
+
+http://www.linuxidc.com/Linux/2015-02/112986.htm	VirtualBox上Ubuntu Server虚拟机配置双网卡	//可以先 ifconfig -a
+	/etc/network/interfaces
+auto lo
+iface lo inet loopback
+auto eth0
+iface eth0 inet dhcp
+修改此文件，添加eth1的配置信息
+auto eth1
+iface eth1 inet dhcp
+或者
+auto eth1
+iface eth1 inet static
+address 192.168.56.101  # 参考宿主机器“VirtualBox Host-Only Network”配置
+netmask 255.255.255.0	
+
+http://blog.csdn.net/hello_yang213/article/details/49364527	// 《Linux》/etc/hosts，/etc/host.conf，/etc/resolv.conf
+	 /etc/hosts 文件	它与Windows系统下的host的文件相类似，就是一个文本文件，里面存放一些IP和域名的对应关系
+	 /etc/host.conf		#解析器查询顺序配置文件	
+		#表示先查询本地hosts文件，如果没有结果，再尝试查找BIND dns服务器
+		order hosts, bind 
+		multi on
+	/etc/resolv.conf	#配置Linux系统DNS服务器的配置文件
+		#表示DNS服务器域名是shanghai.ABC.com，DNS服务器的地址是172.10.10.20
+		search shanghai.ABC.com
+		nameserver 172.10.10.20
+
+https://www.zhihu.com/question/21787311		网关和路由器的区别是什么？
+	A：在使用Windows系统的PC机上配置Internet协议（TCP/IP）属性时，“默认网关”是指路由器（Router）还是网关（Gateway）？
+	Q：概念理解有错误。首先‘网关’一个大概念，不具体特指一类产品，只要连接两个不同的网络的设备都可以叫网关；而‘路由器’么一般特指能够实现路由寻找和转发的特定类产品，路由器很显然能够实现网关的功能。当然电信行业说的‘路由器’又和家用的‘路由器’两个概念，这个暂且不表。回到题目中你说问的默认网关是什么，默认网关事实上不是一个产品而是一个网络层的概念，PC本身不具备路由寻址能力，所以PC要把所有的IP包发送到一个默认的中转地址上面进行转发，也就是默认网关。这个网关可以在路由器上，可以在三层交换机上，可以在防火墙上，可以在服务器上，所以和物理的设备无关。
+
+https://jingyan.baidu.com/article/e52e36155e60e340c60c5182.html		路由器**网关**怎么设置
+
+https://jingyan.baidu.com/article/3c343ff7e862850d3679637b.html		LAN、WAN、WLAN的区别
+
+https://m.baidu.com/from=1012555e/bd_page_type=1/ssid=0/uid=0/pu=usm%401%2Csz%401320_2001%2Cta%40iphone_1_11.1_3_604/baiduid=2D5E352E70C7F2C650F73458D752360D/w=0_10_/t=iphone/l=3/tc?ref=www_iphone&lid=10694671021327525474&order=13&fm=alop&srd=1&dict=32&otn=1&tj=insp_normal_13_0_10_l1&w_qd=IlPT2AEptyoA_ykxyw5arvGxFktUf-Enw5YNav4TvvS&tcplug=1&sec=27095&di=3809aab3f80d25cf&bdenc=1&tch=124.1467.108.1990.1.1269&nsrc=IlPT2AEptyoA_yixCFOxXnANedT62v3IGtiGLCADATGn95qshbWxBcJqHzv7LnDTUS3bdD4RsR9ExGmf_mYskNYWgK&eqid=946b1aa18fe42800100000035a6677d4&wd=&clk_info=%7B%22srcid%22%3A28341%2C%22tplname%22%3A%22insp_normal%22%2C%22t%22%3A1516664976270%2C%22xpath%22%3A%22div-div-div-a-h3%22%7D&sfOpen=1		如何设置路由器图解
+	上网方式：
+	PPPOE：     拨号上网，单机（以前没使用路由器的时候）使用Windows系统自带的宽带连接 来拨号，**运营商给了一个用户名和密码**。这是目前最常见的上网方式，ADSL线路一般都是该上网方式。
+	静态IP地址：前端运营商给**提供了一个固定的IP地址、网关、DNS等等参数**，在一些光纤线路上有应用。
+	动态IP：    没用路由器之前，电脑只要连接好线路，不用拨号，也不用设置IP地址等就能上网的，在**小区宽带、校园网**等环境中会有应用。
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

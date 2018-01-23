@@ -1,0 +1,47 @@
+http://blog.csdn.net/langb2014/article/details/54646675		Ubuntu设置su和sudo为不需要密码
+
+针对非服务器用户，只是用普通的Ubuntu桌面用户，嫌密码麻烦可以这么设置一下。。。。。。。。。
+
+一 设置sudo为不需要密码
+
+需要编辑/etc/sudoers文件将用户加入，该文件只能使用vi sudo命令，
+
+1) 首先需要切换到root, su - (注意有- ，这和su是不同的，在用命令"su"的时候只是切换到root，但没有把root的环境变量传过去，还是当前用乎的环境变量，用"su -"命令将环境变量也一起带过去，就象和root登录一样)
+
+2) 然后gedit /etc/sudoers, 
+
+root ALL=(ALL)   ALL
+
+your_user_name ALL=(ALL)   ALL
+
+然后按Esc，再输入:w保存文件，再:q退出
+
+这样就把自己加入了sudo组，可以使用sudo命令了。
+
+3) 默认5分钟后刚才输入的sodo密码过期，下次sudo需要重新输入密码，如果觉得在sudo的时候输入密码麻烦，把刚才的输入换成如下内容即可：
+your_user_name ALL=(ALL) NOPASSWD: ALL
+
+4）如果你想设置只有某些命令可以sudo的话，your_user_name   ALL= (root) NOPASSWD: /sbin/mount, (root) NOPASSWD: /bin/umount, (root) NOPASSWD: /mnt/mount, (root) NOPASSWD: /bin/rm, (root) NOPASSWD: /usr/bin/make, (root) NOPASSWD: /bin/ln, (root) NOPASSWD: /bin/sh, (root) NOPASSWD: /bin/mv, (root) NOPASSWD: /bin/chown, (root) NOPASSWD: /bin/chgrp, (root) NOPASSWD: /bin/cp, (root) NOPASSWD: /bin/chmod
+
+注意： 有的时候你的将用户设了nopasswd，但是不起作用，原因是被后面的group的设置覆盖了，需要把group的设置也改为nopasswd。
+
+joe ALL=(ALL) NOPASSWD: ALL
+
+%admin ALL=(ALL) NOPASSWD: ALL
+二 设置su为不需要密码
+
+如果需要对某用户su命令也不需要输入密码，则需要修改下列的：
+1）切换到root权限；
+2）创建group为wheel，命令为groupadd wheel；
+3）将用户加入wheel group中，命令为usermod -G wheel joe；
+4）修改su的配置文件/etc/pam.d/su,增加下列项：
+ auth       required   pam_wheel.so group=wheel 
+# Uncomment this if you want wheel members to be able to
+# su without a password.
+ auth       sufficient pam_wheel.so trust use_uid
+至此你可以使用例如如下的命令且不需要输入密码：su joe -c command。
+三 ubuntu 启用root
+sudo -i
+sudo passwd root
+disable by below：
+sudo passwd -dl root
