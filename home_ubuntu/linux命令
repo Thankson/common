@@ -1,0 +1,7 @@
+############# 单个命令 #############
+pm-hibernate
+nautinus
+
+############# 命令组合 ############# 
+grep "包含的字符" . -nr --include=pom.xml
+grep -lr "包含的字符" . | xargs sed -i "s/oldContent/newContent/g"
