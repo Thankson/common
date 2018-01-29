@@ -5,3 +5,5 @@ nautinus
 ############# 命令组合 ############# 
 grep "包含的字符" . -nr --include=pom.xml
 grep -lr "包含的字符" . | xargs sed -i "s/oldContent/newContent/g"
+
+find . -empty -type d -and ! -iregex ./\.git.* -exec touch {}/.gitignore \;     // 在 git仓库中保留空目录的目录结构
